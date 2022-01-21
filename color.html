@@ -1,0 +1,35 @@
+<html lang="en" class="no-js">
+<head>
+	<title>19 Small Project</title>
+	<script type="text/javascript" src="js/code.js"></script>
+	<link href="css/color.css" rel="stylesheet">
+</head>
+
+<body>
+	<!-- Page -->
+	<section class="page-container">
+		<h2>COP4331 Group 19's Small Project</h2>
+		<div class="color-box">
+			<!-- Name/Logout -->
+			<span class="head-text">Logged in as *name*</span>
+			<span id="name"></span>
+			<button type="button" class="text" onclick="doLogout();">Log Out</button>
+
+			<!-- Search -->
+			<span style="height: 1%"></span>
+			<input type="text" id="search" class="text" placeholder="Search for a color">
+			<button type="button" class="text" onclick="searchColor();">Search</button>
+
+			<span id="colorSearchResult"></span>
+			<p id="colorList"></p>
+
+			<!-- Add -->
+			<span style="height: 1%"></span>
+			<input type="text" id="add" class="text" placeholder="Add a color">
+			<button type="button" class="text" onclick="addColor();">Add</button>
+
+			<span id="addResult"></span>
+		</div>
+	</section>
+</body>
+</html>
