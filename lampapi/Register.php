@@ -7,8 +7,8 @@ $inData = getRequestInfo();
 $id = 0;
 $firstName = $inData["firstname"];
 $lastName = $inData["lastname"];
-$login = $inData["login"];
-$password = $inData["password"];
+$login = $inData["Login"];
+$password = $inData["Password"];
 
 $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
 if( $conn->connect_error )
