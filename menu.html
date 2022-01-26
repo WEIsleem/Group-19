@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<title>19 Small Project</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="js/dataFunctions.js"></script>
+	<link href="css/menu.css" rel="stylesheet">
+</head>
+
+<body>
+	<!-- Page -->
+	<section class="page-container">
+		<h2>COP4331 Group 19's Small Project</h2>
+		<div class="color-box">
+			<!-- Name/Logout -->
+			<span id="headText" class="head-text">Logged in as *name*</span>
+			<button class="text" onclick="logout();">Log Out</button>
+			<a class="#" href="index.html">Test</a>
+
+			<!-- Create -->
+			<div class="selected-box">
+				<span id="selected" class="text">Add a Contact</span>
+				<input type="text" id="nameText" class="text" placeholder="Name (First & Last)">
+				<input type="text" id="emailText" class="text" placeholder="Email">
+				<input type="text" id="phoneText" class="text" placeholder="Phone">
+				<button class="text menu-buttons" onclick="create();">Create</button>
+				<span id="createResult"></span>
+			</div>
+
+			<!-- Delete popup -->
+			<div id="deletePopup" class="popup">
+				<p>ARE YOU SURE YOU WANT TO DELETE THIS CONTACT?</p>
+				<button class="text menu-buttons" onclick="deleteContact();">Yes</button>
+				<button class="text menu-buttons" onclick="popupHidden();">No</button>
+			</div>
+
+			<!-- Search/Update/Delete -->
+			<div class="selected-box">
+				<span id="selected" class="text">Search for a contact</span>
+				<input type="text" id="nameText" class="text" placeholder="Name (First & Last)">
+				<input type="text" id="emailText" class="text" placeholder="Email">
+				<input type="text" id="phoneText" class="text" placeholder="Phone">
+				<button class="text menu-buttons" onclick="search();">Search</button>
+				<span id="searchResult"></span>
+
+				<!-- Found contacts -->
+				<div class="searched-box">
+					<div id="box1" class="found-box">
+						<span id="found1" class="text">Joe Name <br> averagejoe@email.com <br> 000-000-0000</span>
+						<div class="search-buttons">
+							<button class="text menu-buttons" onclick="update();">Update</button>
+							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+						</div>
+					</div>
+
+					<div id="box2" class="found-box">
+						<span id="found2" class="text">Joe Name <br> averagejoe@email.com <br> 000-000-0000</span>
+						<div class="search-buttons">
+							<button class="text menu-buttons" onclick="update();">Update</button>
+							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+						</div>
+					</div>
+
+					<div id="box3" class="found-box">
+						<span id="found3" class="text">Joe Name <br> averagejoe@email.com <br> 000-000-0000</span>
+						<div class="search-buttons">
+							<button class="text menu-buttons" onclick="update();">Update</button>
+							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+						</div>
+					</div>
+
+					<div id="box4" class="found-box">
+						<span id="found4" class="text">Joe Name <br> averagejoe@email.com <br> 000-000-0000</span>
+						<div class="search-buttons">
+							<button class="text menu-buttons" onclick="update();">Update</button>
+							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+						</div>
+					</div>
+
+					<div id="box5" class="found-box">
+						<span id="found5" class="text">Joe Name <br> averagejoe@email.com <br> 000-000-0000</span>
+						<div class="search-buttons">
+							<button class="text menu-buttons" onclick="update();">Update</button>
+							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+						</div>
+					</div>
+
+					<div id="box6" class="found-box">
+						<span id="found6" class="text">Joe Name <br> averagejoe@email.com <br> 000-000-0000</span>
+						<div class="search-buttons">
+							<button class="text menu-buttons" onclick="update();">Update</button>
+							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+						</div>
+					</div>
+
+					<!-- Next and previous buttons -->
+					<div style="text-align: center">
+						<button id="prev" class="text" onclick="searchPrev();"><</button>
+						<button id="next" class="text" onclick="searchNext();">></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
