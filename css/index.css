@@ -7,15 +7,39 @@ html {
 	height: 100%;
 }
 input {
-	width: 50%;
+	width: 60%;
 	text-align: center;
 }
 
+/* Phone Scaling */
+@media screen and (max-device-width: 480px) {
+	h1 {
+		font-size: 20px;
+	}
+	input {
+		width: 80% !important;
+	}
+
+	.page-container {
+		transform: translate(-2%, 0) !important;
+	}
+	.login-box {
+		width: 90% !important;
+	}
+
+	.head-text {
+		font-size: 22px !important;
+	}
+}
+
+/* Boxes/Containers */
 .page-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 98.5%;
+	column-gap: 10px;
+	height: auto;
+	transform: translate(-1%, 0);
 	font-family: 'Trebuchet MS';
 	/*border: 3px dashed black;*/
 }
@@ -30,7 +54,11 @@ input {
 	border: 3px solid #4f4f4f;
 	/*border: 3px dashed blue;*/
 }
+.input-box {
+	width: 60%;
+}
 
+/* Text */
 .head-text {
 	font-family: 'Trebuchet MS';
 	font-size: 25px;

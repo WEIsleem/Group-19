@@ -7,8 +7,48 @@ html {
 	height: 100%;
 }
 input {
-	width: 50%;
+	width: 60%;
 	text-align: center;
+}
+
+/* Phone Scaling */
+@media only screen and (max-width: 700px){
+	h1 {
+		font-size: 20px;
+	}
+	input {
+		width: 80% !important;
+	}
+
+	.page-container {
+		transform: translate(-2%, 0) !important;
+	}
+	.color-box {
+		width: 90% !important;
+	}
+	.selected-box {
+		width: 90% !important;
+	}
+	.searched-box {
+		height: 700px !important;
+	}
+	.found-box {
+		flex-direction: column;
+		align-items: flex-start !important;
+	}
+	.popup {
+		margin-top: 50% !important;
+		width: 80% !important;
+	}
+
+	.search-buttons {
+		flex-direction: row !important;
+		justify-content: center;
+		width: 100%;
+	}
+	.head-text {
+		font-size: 22px !important;
+	}
 }
 
 /* Boxes/Containers */
@@ -17,8 +57,8 @@ input {
 	flex-direction: column;
 	align-items: center;
 	column-gap: 10px;
-	width: 98.5%;
 	height: auto;
+	transform: translate(-1%, 0);
 	font-family: 'Trebuchet MS';
 	/*border: 3px dashed black;*/
 }
@@ -37,7 +77,7 @@ input {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: 10px;
+	gap: 15px;
 	width: 80%;
 	min-height: 200px;
 	background-color: #c4c4c4;
@@ -47,26 +87,25 @@ input {
 .searched-box {
 	display: grid;
 	grid-template-rows: repeat(6, 1fr);
-	width: 80%;
+	width: 90%;
 	height: 500px;
 	align-items: center;
-	border: 3px dashed red;*/
+	/*border: 3px dashed red;*/
 }
 .found-box {
-	display: grid;
-	grid-template-columns: auto 110px;
-	grid-template-areas:
-		"information buttons";
-	border: 3px dashed purple;*/
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	/*border: 3px dashed purple;*/
 }
 .popup {
 	display: none;
 	position: fixed;
 	text-align: center;
 	margin-top: 20%;
-	padding-top: 3%;
-	width: 50%;
-	height: 20%;
+	padding-top: 5px;
+	width: 450px;
+	height: 100px;
 	color: #ffffff;
 	background-color: #4f4f4f;
 }

@@ -11,7 +11,7 @@
 <body>
 	<!-- Page -->
 	<section class="page-container">
-		<h2>COP4331 Group 19's Small Project</h2>
+		<h1>COP4331 Group 19's Small Project</h1>
 		<div class="color-box">
 			<!-- Name/Logout -->
 			<span id="headText" class="head-text">Logged in as *name*</span>
@@ -28,16 +28,18 @@
 				<span id="createResult"></span>
 			</div>
 
-			<!-- Delete popup -->
-			<div id="deletePopup" class="popup">
-				<p>ARE YOU SURE YOU WANT TO DELETE THIS CONTACT?</p>
-				<button class="text menu-buttons" onclick="deleteContact();">Yes</button>
-				<button class="text menu-buttons" onclick="popupHidden();">No</button>
-			</div>
 
 			<!-- Search/Update/Delete -->
 			<div class="selected-box">
-				<span id="selected" class="text">Search for a contact</span>
+				<!-- Delete popup -->
+				<div id="deletePopup" class="popup">
+					<p>ARE YOU SURE YOU WANT TO DELETE THIS CONTACT?</p>
+					<button class="text menu-buttons" onclick="deleteContact();">Yes</button>
+					<button class="text menu-buttons" onclick="popupHidden();">No</button>
+				</div>
+				
+				<span style="height: 0.5px"></span>
+				<span id="selected" class="text">Search for a Contact</span>
 				<input type="text" id="nameText" class="text" placeholder="Name (First & Last)">
 				<input type="text" id="emailText" class="text" placeholder="Email">
 				<input type="text" id="phoneText" class="text" placeholder="Phone">
@@ -101,6 +103,7 @@
 					</div>
 				</div>
 			</div>
+			<span style="height: 10px"></span>
 		</div>
 	</section>
 </body>
