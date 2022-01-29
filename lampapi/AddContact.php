@@ -1,22 +1,31 @@
 <?php
 	$inData = getRequestInfo();
 	
-	$color = $inData["color"];
+	$firstName = $inData["firstName"];
+	$lastName = $inData["lastName"];
+	$phoneNumber = $inData["phone"];
+	$email = $inData["email"];
 	$userId = $inData["userId"];
 
+
+
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
+/*	echo("First Name: " . $inData["firstName"] . "\n<br>");
+	echo("Last Name: " . $inData["lastName"] . "\n<br>");
+	echo("Phone: " . $inData["phone"] . "\n<br>");
+	echo("Email: " . $inData["email"] . "\n<br>");
+	echo("UserId: " . $inData["userId"] . "\n<br>");*/
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
 	} 
 	else
 	{
-		$stmt = $conn->prepare("INSERT into Contacts (UserId,Name) VALUES(?,?)");
-		$stmt->bind_param("ss", $userId, $color);
+		$stmt = $conn->prepare("INSERT into Contacts (userId, firstName, lastName, email, phone) VALUES(?,?,?,?,?)");
+		$stmt->bind_param("ssssi", $userId, $firstName, $lastName, $email, $phoneNumber);
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
 	}
 
 	function getRequestInfo()

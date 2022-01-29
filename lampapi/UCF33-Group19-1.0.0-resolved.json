@@ -1,0 +1,256 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the API documentation for Group19",
+    "version": "1.0.0",
+    "title": "Group19",
+    "contact": {
+      "email": "renriquez2019@knights.ucf.edu"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "thebenbowles.com",
+  "basePath": "/cop4331/lampapi",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/Login.php": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Logs in to account",
+        "description": "Logs in to account",
+        "operationId": "doLogin",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "loginItem",
+            "description": "Login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "URL Not Found"
+          }
+        }
+      }
+    },
+    "/SearchContact.php": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Searches contacts",
+        "description": "Searches contact from a user's contact list",
+        "operationId": "searchContact",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "search Item",
+            "description": "Contact Search",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Search"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "URL Not Found"
+          }
+        }
+      }
+    },
+    "/AddContact.php": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Adds a contact",
+        "description": "Adds a contact to a user's contact list",
+        "operationId": "addContact",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "addItem",
+            "description": "Add Contact",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "URL Not Found"
+          }
+        }
+      }
+    },
+    "/Register.php": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Adds a user",
+        "description": "Adds a user to the database",
+        "operationId": "doRegister",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "registerItem",
+            "description": "Register",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Register"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "URL Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Login": {
+      "type": "object",
+      "required": [
+        "login",
+        "password"
+      ],
+      "properties": {
+        "login": {
+          "type": "string",
+          "example": "testperson"
+        },
+        "password": {
+          "type": "string",
+          "example": "testPassword"
+        }
+      }
+    },
+    "Contact": {
+      "type": "object",
+      "required": [
+        "email",
+        "firstName",
+        "lastName",
+        "phone"
+      ],
+      "properties": {
+        "userId": {
+          "type": "integer",
+          "example": 1
+        },
+        "firstName": {
+          "type": "string",
+          "example": "karina"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "n"
+        },
+        "email": {
+          "type": "string",
+          "example": "mail@gmail.com"
+        },
+        "phone": {
+          "type": "integer",
+          "example": 5555555555
+        }
+      }
+    },
+    "Search": {
+      "type": "object",
+      "required": [
+        "search",
+        "userID"
+      ],
+      "properties": {
+        "userID": {
+          "type": "integer",
+          "example": 1
+        },
+        "search": {
+          "type": "string",
+          "example": "bl"
+        }
+      }
+    },
+    "Register": {
+      "type": "object",
+      "required": [
+        "firstname",
+        "lastname",
+        "login",
+        "password"
+      ],
+      "properties": {
+        "firstname": {
+          "type": "string",
+          "example": "ryan"
+        },
+        "lastname": {
+          "type": "string",
+          "example": "enriquez"
+        },
+        "login": {
+          "type": "string",
+          "example": "testperson"
+        },
+        "password": {
+          "type": "string",
+          "example": "testPassword"
+        }
+      }
+    }
+  }
+}
