@@ -19,11 +19,24 @@
 		$stmt = $conn->prepare("SELECT userId FROM Contacts WHERE userId = $userId");
 		$stmt->execute();
 
+		$result = $stmt->get_result();
 		
+        	// delete from database
+		if ($row = $result->fetch_assoc())
+		{
+			$stmt = $conn->prepare("UPDATE Contacts SET firstName = $firstName, lastName = $lastName, Email = $email, Phone = $phone WHERE userId = $userId");
+        	$stmt->bind_param("ssss", $firstName, $lastName, $email, $phoneNumber);
+			$stmt->execute();
+			
+		}
+        else 
+        {
+            returnWithError( "No Records Found" );
+        }
 
-		$stmt = $conn->prepare("UPDATE Contacts SET firstName = $firstName, lastName = $lastName, Email = $email, Phone = $phone WHERE userId = $userId");
-        $stmt->bind_param("ssss", $firstName, $lastName, $email, $phoneNumber);
-		$stmt->execute();
+
+
+		
 		
 		//$result = $stmt->get_result();
 		
