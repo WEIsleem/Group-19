@@ -15,30 +15,17 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("UPDATE Contacts SET firstName, lastName, email, phone VALUES ?,?,?,? WHERE userId = $userId");
+
+		$stmt = $conn->prepare("SELECT userId FROM Contacts WHERE userId = $userId");
+		$stmt->execute();
+
+		
+
+		$stmt = $conn->prepare("UPDATE Contacts SET firstName = $firstName, lastName = $lastName, Email = $email, Phone = $phone WHERE userId = $userId");
         $stmt->bind_param("ssss", $firstName, $lastName, $email, $phoneNumber);
 		$stmt->execute();
 		
-		$result = $stmt->get_result();
-		
-		while($row = $result->fetch_assoc())
-		{
-			if( $searchCount > 0 )
-			{
-				$searchResults .= ",";
-			}
-			$searchCount++;
-			$searchResults .= '"' . $row["Name"] . '"';
-		}
-		
-		if( $searchCount == 0 )
-		{
-			returnWithError( "No Records Found" );
-		}
-		else
-		{
-			returnWithInfo( $searchResults );
-		}
+		//$result = $stmt->get_result();
 		
 		$stmt->close();
 		$conn->close();
