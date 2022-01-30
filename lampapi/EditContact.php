@@ -24,9 +24,9 @@
         	// delete from database
 		if ($row = $result->fetch_assoc())
 		{
-			$stmt = $conn->prepare("UPDATE Contacts SET firstName = $firstName, lastName = $lastName, Email = $email, Phone = $phone WHERE userId = $userId");
-        	$stmt->bind_param("ssss", $firstName, $lastName, $email, $phoneNumber);
-			$stmt->execute();
+			$conn->query("UPDATE Contacts SET firstName = $firstName, lastName = $lastName, Email = $email, Phone = $phone WHERE userId = $userId");
+        	#$stmt->bind_param("ssss", $firstName, $lastName, $email, $phoneNumber);
+			#$stmt->execute();
 		}
         else 
         {
