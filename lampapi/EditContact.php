@@ -16,7 +16,7 @@
 	else
 	{
 
-		$stmt = $conn->prepare("SELECT userId, firstName, lastName FROM Contacts WHERE (userId='$userId', firstName = '$firstName', lastName = '$lastName')");
+		$stmt = $conn->prepare("SELECT userId, firstName, lastName FROM Contacts WHERE (userId='$userId' AND firstName = '$firstName' AND lastName = '$lastName')");
 		$stmt->execute();
 
 		$result = $stmt->get_result();
@@ -24,7 +24,7 @@
         	// delete from database
 		if ($row = $result->fetch_assoc())
 		{
-			$conn->query("UPDATE Contacts SET Email = '$email', Phone = '$phone' WHERE (userId = '$userId', firstName = '$firstName', lastName = '$lastName')");
+			$conn->query("UPDATE Contacts SET Email = '$email', Phone = '$phone' WHERE (userId = '$userId' AND firstName = '$firstName' AND lastName = '$lastName')");
 		}
         else 
         {
