@@ -1,8 +1,7 @@
 <?php
 
 	$inData = getRequestInfo();
-
-    $userID = $inData["userID"];
+	$userID = $inData["userID"];
 
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -22,12 +21,11 @@
 		if ($row = $result->fetch_assoc())
 		{
 			$conn->query("DELETE FROM Contacts WHERE userID=$userID");
-            returnWithError("");
 		}
-        else 
-        {
-            returnWithError( "No Records Found" );
-        }
+		else 
+		{
+		    returnWithError( "No Records Found" );
+		}
 		
 		$stmt->close();
 		$conn->close();
