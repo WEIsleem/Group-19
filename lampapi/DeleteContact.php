@@ -12,10 +12,8 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select Name from Contacts to delete where Name like ? and UserID=?");
-		$contactName = "%" . $inData["search"] . "%";
-        $contactId = $inData["userId"];
-		$stmt->bind_param("ss", $contactName, $contactId);
+		$stmt = $conn->prepare("DELETE FROM Contacts WHERE firstname = ? AND userId = ?");
+        $stmt->bind_param("ss", $inData["firstName"], $inData["userId"]);
 		$stmt->execute();
         $result = $stmt->get_result();
 		
@@ -38,9 +36,8 @@
 			returnWithInfo( $searchResults );
 		}
 
-        $stmt = $conn->prepare("DELETE FROM Contacts WHERE userId = $contactId");
-        $stmt->execute();
-        	
+        
+
 		$stmt->close();
 		$conn->close();
 	}
