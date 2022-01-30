@@ -1,7 +1,7 @@
 <?php
 
 	$inData = getRequestInfo();
-	$userID = $inData["userID"];
+	$userId = $inData["userId"];
 
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -11,21 +11,21 @@
 	} 
 	else
 	{
-        // check if item in database
-		$stmt = $conn->prepare("SELECT userID FROM Contacts WHERE userID = $userID");
+        	// check if item in database
+		$stmt = $conn->prepare("SELECT userId FROM Contacts WHERE userId = $userId");
 		$stmt->execute();
 
 		$result = $stmt->get_result();
 		
-        // delete from database
+        	// delete from database
 		if ($row = $result->fetch_assoc())
 		{
-			$conn->query("DELETE FROM Contacts WHERE userID=$userID");
+			$conn->query("DELETE FROM Contacts WHERE userId=$userId");
 		}
-		else 
-		{
-		    returnWithError( "No Records Found" );
-		}
+        else 
+        {
+            returnWithError( "No Records Found" );
+        }
 		
 		$stmt->close();
 		$conn->close();
@@ -44,7 +44,7 @@
 	
 	function returnWithError( $err )
 	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
