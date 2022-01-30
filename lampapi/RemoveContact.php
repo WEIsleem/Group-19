@@ -13,7 +13,7 @@
 	else
 	{
         	// check if item in database
-		$stmt = $conn->prepare("SELECT userId FROM Contacts WHERE userId=$userId AND firstName=$firstName AND lastName=$lastName");
+		$stmt = $conn->prepare("SELECT userId, firstName, lastName FROM Contacts WHERE (userId='$userId' AND firstName='$firstName' AND lastName='$lastName')");
 		$stmt->execute();
 
 		$result = $stmt->get_result();
@@ -21,7 +21,7 @@
         	// delete from database
 		if ($row = $result->fetch_assoc())
 		{
-			$conn->query("DELETE FROM Contacts WHERE userId=$userId AND firstName=$firstName AND lastName=$lastName");
+			$conn->query("DELETE FROM Contacts WHERE (userId='$userId' AND firstName='$firstName' AND lastName='$lastName')");
 		}
         else 
         {
