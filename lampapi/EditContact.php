@@ -4,7 +4,7 @@
 	
 	$firstName = $inData["firstName"];
 	$lastName = $inData["lastName"];
-	$phoneNumber = $inData["Phone"];
+	$phone = $inData["Phone"];
 	$email = $inData["Email"];
 	$userId = $inData["userId"];
 
@@ -24,7 +24,7 @@
         	// delete from database
 		if ($row = $result->fetch_assoc())
 		{
-			$conn->query("UPDATE Contacts SET Email = '$email', Phone = '$phoneNumber' WHERE (userId = $userId, firstName = '$firstName', lastName = '$lastName')");
+			$conn->query("UPDATE Contacts SET Email = '$email', Phone = '$phone' WHERE (userId = '$userId', firstName = '$firstName', lastName = '$lastName')");
 		}
         else 
         {
