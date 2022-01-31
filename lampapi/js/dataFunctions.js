@@ -10,7 +10,7 @@ var deleteId = "";
 console.log("hi");
 
 // -----Index.html-----
-// Taken from LAMP - should work in theory
+// Register a new user - works
 function register()
 {
 	firstName = document.getElementById("newFirstName").value;
@@ -20,7 +20,7 @@ function register()
 	// Put login into database
 	document.getElementById("registerResult").innerHTML = "";
 
-	let tmp = {login:login,password:password,firstname:firstName,lastname:lastName};
+	let tmp = {firstname:firstName,lastname:lastName,Login:username,Password:password};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/Register.' + extension;
@@ -52,7 +52,7 @@ function register()
 	}
 }
 
-// Taken from LAMP - should work in theory
+// Login a user - works
 function login()
 {
 	let username = document.getElementById("username").value;
@@ -60,7 +60,7 @@ function login()
 
 	document.getElementById("loginResult").innerHTML = "";
 
-	let tmp = {login:login,password:password};
+	let tmp = {login:username,password:password};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/Login.' + extension;
@@ -99,7 +99,7 @@ function login()
 	}
 }
 
-// Taken from LAMP - should work in theory
+// Saves the logged in user - works
 function saveCookie()
 {
 	let minutes = 20;
@@ -108,7 +108,7 @@ function saveCookie()
 	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
-// Taken from LAMP - should work in theory
+// Reads the logged in user - works
 function readCookie()
 {
 	userId = -1;
@@ -145,7 +145,7 @@ function readCookie()
 
 
 // -----Menu.html-----
-// Taken from LAMP - should work in theory
+// Logs user out - works
 function logout()
 {
 	// Go back to main page
@@ -155,21 +155,15 @@ function logout()
 	window.location.href = "index.html";
 }
 
-<<<<<<< Updated upstream:js/dataFunctions.js
-// Taken from LAMP - should work in theory
-=======
 // Create a new contact - works
->>>>>>> Stashed changes:lampapi/js/dataFunctions.js
 function create()
 {
-	let newName = document.getElementById("nameText").value;
-	let newEmail = document.getElementById("emailText").value;
-	let newPhone = document.getElementById("phoneText").value;
+	let newFirst = document.getElementById("createFirstText").value;
+	let newLast = document.getElementById("createLastText").value;
+	let newEmail = document.getElementById("createEmailText").value;
+	let newPhone = document.getElementById("createPhoneText").value;
 	document.getElementById("createResult").innerHTML = "";
 
-<<<<<<< Updated upstream:js/dataFunctions.js
-	let tmp = {name:newName,email:newEmail,phone:newPhone,userId:userId};
-=======
 	// Check valid email and phone
 	if (newEmail.match(/\S+@\S+\.\S+/) == null)
 	{
@@ -183,7 +177,6 @@ function create()
 	}
 
 	let tmp = {userId:userId,firstName:newFirst,lastName:newLast,email:newEmail,phone:newPhone};
->>>>>>> Stashed changes:lampapi/js/dataFunctions.js
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddContact.' + extension;
@@ -213,26 +206,14 @@ function create()
 	}
 }
 
-<<<<<<< Updated upstream:js/dataFunctions.js
-// Taken from LAMP - should work in theory
-=======
 // Search for existing objects - THROWS BACK NAME COLUMN NOT FIRST + LAST NAMES
->>>>>>> Stashed changes:lampapi/js/dataFunctions.js
 function search()
 {
-	// Search by name, email, OR phone
-	let srch = document.getElementById("nameText").value;
-	if(!srch)
-	{
-		let srch = document.getElementById("emailText").value;
-	}
-	if(!srch)
-	{
-		let srch = document.getElementById("phoneText").value;
-	}
+	// Search by first name
+	let srch = document.getElementById("searchFirstText").value;
 	document.getElementById("searchResult").innerHTML = "";
 
-	let tmp = {search:srch,userId:userId};
+	let tmp = {userId:userId,search:srch};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/SearchContact.' + extension;
@@ -246,8 +227,15 @@ function search()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("searchResult").innerHTML = "Found contact(s)";
 				let jsonObject = JSON.parse( xhr.responseText );
+				console.log(jsonObject);
+				if (jsonObject.error) {
+					document.getElementById("searchResult").innerHTML = jsonObject.error;
+					checkButtons(0);
+					return;
+				}
+
+				console.log(jsonObject.results);
 				searchList = jsonObject.results;
 
 				let length = (jsonObject.results.length > 6) ? 6 : jsonObject.results.length;
@@ -267,6 +255,7 @@ function search()
 					document.getElementById("next").disabled = false;
 				}
 
+				document.getElementById("searchResult").innerHTML = "Found contact(s)";
 				checkButtons(length);
 			}
 		};
@@ -288,14 +277,13 @@ function search()
 function popupVisible(contact)
 {
 	deleteId = contact.parentNode.parentNode.id;
-	document.getElementById("deletePopup").style.display = "block";
 	console.log("Delete " + deleteId + "?");
-}
-
-// Hide delete popup - works
-function popupHidden()
-{
-	document.getElementById("deletePopup").style.display = "none";
+	if (confirm("ARE YOU SURE YOU WANT TO DELETE THIS CONTACT?")) {
+		deleteContact();
+	}
+	else {
+		console.log("Ok bye");
+	}
 }
 
 // NEEDS DELETE CONNECTION TO API - hiding works
@@ -326,7 +314,7 @@ function checkButtons(length)
 	console.log("BUTTON CHECK COMPLETE")
 }
 
-// Grab next 6 contacts to display - NEED TEST
+// Grab next 6 contacts to display - works
 function searchNext()
 {
 	let length = (searchList.length-searchIndex > 6) ? 6 : (searchList.length-searchIndex) ;
@@ -347,11 +335,7 @@ function searchNext()
 	searchIndex--;
 }
 
-<<<<<<< Updated upstream:js/dataFunctions.js
-// Grab last 6 contacts to display - NEED TEST
-=======
 // Grab last 6 contacts to display - NOT SHOWING
->>>>>>> Stashed changes:lampapi/js/dataFunctions.js
 function searchPrev()
 {
 	for (let i = 6; i >= 1; i--)
