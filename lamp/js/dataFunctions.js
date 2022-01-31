@@ -176,7 +176,7 @@ function create()
 		return;
 	}
 
-	let tmp = {userId:userId,firstName:newFirst,lastName:newLast,email:newEmail,phone:newPhone};
+	let tmp = {userId:userId,firstName:newFirst,lastName:newLast,Email:newEmail,Phone:newPhone};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddContact.' + extension;
@@ -267,10 +267,55 @@ function search()
 	}
 }
 
-//function update()
+function update()
 {
 	// ADD UPDATE
-	//console.log("CONTACT UPDATED");
+	let updateEmail = document.getElementById("updateEmailText").value;
+	let updatePhone = document.getElementById("updatePhoneText").value;
+	document.getElementById("updateResult").innerHTML = "";
+
+	// Check valid email and phone
+	if (newEmail.match(/\S+@\S+\.\S+/) == null)
+	{
+		document.getElementById("createResult").innerHTML = "Invalid email";
+		return;
+	}
+	if (newPhone.match(/^\d+$/) == null)
+	{
+		document.getElementById("createResult").innerHTML = "Invalid phone number";
+		return;
+	}
+
+	let tmp = {userId:userId,firstName:newFirst,lastName:newLast,email:newEmail,phone:newPhone};
+	let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/AddContact.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				document.getElementById("createResult").innerHTML = "Contact added successfully";
+
+				document.getElementById("createFirstText").value = "";
+				document.getElementById("createLastText").value = "";
+				document.getElementById("createEmailText").value = "";
+				document.getElementById("createPhoneText").value = "";
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("createResult").innerHTML = err.message;
+	}
+
+	console.log("CONTACT UPDATED");
 }
 
 // Show delete popup - works
