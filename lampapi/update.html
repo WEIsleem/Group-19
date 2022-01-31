@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<title>19 Small Project</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="js/dataFunctions.js"></script>
+	<link href="css/update.css" rel="stylesheet">
+
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function()
+		{
+			readCookie();
+		}, false);
+	</script>
+</head>
+
+<body>
+	<!-- Page -->
+	<section class="page-container">
+		<h1>COP4331 Group 19's Small Project</h1>
+		<div class="color-box">
+			<!-- Name/Logout -->
+			<span id="headText" class="head-text"></span>
+			<button class="text" onclick="logout();">Log Out</button>
+			<span id="timeout"></span>
+
+			<!-- Update -->
+			<div class="selected-box">
+				<span id="selected" class="text">Update a Contact</span>
+				<input type="text" id="updateFirstText" class="text" placeholder="First Name">
+				<input type="text" id="updateLastText" class="text" placeholder="Last Name">
+				<input type="text" id="updateEmailText" class="text" placeholder="Email (Ex: email@email.com)">
+				<input type="text" id="updatePhoneText" class="text" placeholder="Phone (Ex: 0001112222)">
+				<div class="update-buttons">
+					<button class="text menu-buttons" onclick="update();">Update</button>
+					<form action="menu.html">
+						<button type="submit" class="text menu-buttons">Cancel</button>
+					</form>
+				</div>
+				<span id="updateResult"></span>
+			</div>
+
+			<span style="height: 10px"></span>
+		</div>
+	</section>
+</body>
+</html>

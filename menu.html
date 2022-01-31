@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream:menu.html
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -108,3 +109,126 @@
 	</section>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<title>19 Small Project</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="js/dataFunctions.js"></script>
+	<link href="css/menu.css" rel="stylesheet">
+
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function()
+		{
+			readCookie();
+		}, false);
+	</script>
+</head>
+
+<body>
+	<!-- Page -->
+	<section class="page-container">
+		<h1>COP4331 Group 19's Small Project</h1>
+		<div class="color-box">
+			<!-- Name/Logout -->
+			<span id="headText" class="head-text"></span>
+			<button class="text" onclick="logout();">Log Out</button>
+			<span id="timeout"></span>
+
+			<!-- Create -->
+			<div class="selected-box">
+				<span id="selected" class="text">Add a Contact</span>
+				<input type="text" id="createFirstText" class="text" placeholder="First Name">
+				<input type="text" id="createLastText" class="text" placeholder="Last Name">
+				<input type="text" id="createEmailText" class="text" placeholder="Email (Ex: email@email.com)">
+				<input type="text" id="createPhoneText" class="text" placeholder="Phone (Ex: 0001112222)">
+				<button class="text menu-buttons" onclick="create();">Create</button>
+				<span id="createResult"></span>
+			</div>
+
+
+			<!-- Search/Update/Delete -->
+			<div class="selected-box">
+				<span style="height: 0.5px"></span>
+				<span id="selected" class="text">Search for a Contact</span>
+				<input type="text" id="searchFirstText" class="text" placeholder="First Name">
+				<button class="text menu-buttons" onclick="search();">Search</button>
+				<span id="searchResult"></span>
+
+				<!-- Found contacts -->
+				<div class="searched-box">
+					<div id="box1" class="found-box" style="display:none">
+						<span id="found1" class="text"></span>
+						<div class="search-buttons">
+							<form action="update.html">
+								<button type="submit" class="text menu-buttons">Update</button>
+							</form>
+							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+						</div>
+					</div>
+
+					<div id="box2" class="found-box" style="display:none">
+						<span id="found2" class="text"></span>
+						<div class="search-buttons">
+							<form action="update.html">
+								<button type="submit" class="text menu-buttons">Update</button>
+							</form>
+							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+						</div>
+					</div>
+
+					<div id="box3" class="found-box" style="display:none">
+						<span id="found3" class="text"></span>
+						<div class="search-buttons">
+							<form action="update.html">
+								<button type="submit" class="text menu-buttons">Update</button>
+							</form>
+							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+						</div>
+					</div>
+
+					<div id="box4" class="found-box" style="display:none">
+						<span id="found4" class="text"></span>
+						<div class="search-buttons">
+							<form action="update.html">
+								<button type="submit" class="text menu-buttons">Update</button>
+							</form>
+							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+						</div>
+					</div>
+
+					<div id="box5" class="found-box" style="display:none">
+						<span id="found5" class="text"></span>
+						<div class="search-buttons">
+							<form action="update.html">
+								<button type="submit" class="text menu-buttons">Update</button>
+							</form>
+							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+						</div>
+					</div>
+
+					<div id="box6" class="found-box" style="display:none">
+						<span id="found6" class="text"></span>
+						<div class="search-buttons">
+							<form action="update.html">
+								<button type="submit" class="text menu-buttons">Update</button>
+							</form>
+							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+						</div>
+					</div>
+
+					<!-- Next and previous buttons -->
+					<div style="text-align: center">
+						<button id="prev" class="text" disabled onclick="searchPrev();"><</button>
+						<button id="next" class="text" disabled onclick="searchNext();">></button>
+					</div>
+				</div>
+			</div>
+			<span style="height: 10px"></span>
+		</div>
+	</section>
+</body>
+</html>
+>>>>>>> Stashed changes:lampapi/menu.html

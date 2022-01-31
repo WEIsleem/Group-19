@@ -155,7 +155,11 @@ function logout()
 	window.location.href = "index.html";
 }
 
+<<<<<<< Updated upstream:js/dataFunctions.js
 // Taken from LAMP - should work in theory
+=======
+// Create a new contact - works
+>>>>>>> Stashed changes:lampapi/js/dataFunctions.js
 function create()
 {
 	let newName = document.getElementById("nameText").value;
@@ -163,7 +167,23 @@ function create()
 	let newPhone = document.getElementById("phoneText").value;
 	document.getElementById("createResult").innerHTML = "";
 
+<<<<<<< Updated upstream:js/dataFunctions.js
 	let tmp = {name:newName,email:newEmail,phone:newPhone,userId:userId};
+=======
+	// Check valid email and phone
+	if (newEmail.match(/\S+@\S+\.\S+/) == null)
+	{
+		document.getElementById("createResult").innerHTML = "Invalid email";
+		return;
+	}
+	if (newPhone.match(/^\d+$/) == null)
+	{
+		document.getElementById("createResult").innerHTML = "Invalid phone number";
+		return;
+	}
+
+	let tmp = {userId:userId,firstName:newFirst,lastName:newLast,email:newEmail,phone:newPhone};
+>>>>>>> Stashed changes:lampapi/js/dataFunctions.js
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddContact.' + extension;
@@ -178,6 +198,11 @@ function create()
 			if (this.readyState == 4 && this.status == 200)
 			{
 				document.getElementById("createResult").innerHTML = "Contact added successfully";
+
+				document.getElementById("createFirstText").value = "";
+				document.getElementById("createLastText").value = "";
+				document.getElementById("createEmailText").value = "";
+				document.getElementById("createPhoneText").value = "";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -188,7 +213,11 @@ function create()
 	}
 }
 
+<<<<<<< Updated upstream:js/dataFunctions.js
 // Taken from LAMP - should work in theory
+=======
+// Search for existing objects - THROWS BACK NAME COLUMN NOT FIRST + LAST NAMES
+>>>>>>> Stashed changes:lampapi/js/dataFunctions.js
 function search()
 {
 	// Search by name, email, OR phone
@@ -233,6 +262,9 @@ function search()
 				{
 					document.getElementById("prev").disabled = true;
 					document.getElementById("next").disabled = true;
+				}
+				else {
+					document.getElementById("next").disabled = false;
 				}
 
 				checkButtons(length);
@@ -284,7 +316,7 @@ function checkButtons(length)
 		if (i <= length)
 		{
 			console.log("See box" + i);
-			document.getElementById("box" + i).style.display = 'visible';
+			document.getElementById("box" + i).style.display = "flex";
 		}
 		else
 		{
@@ -297,32 +329,43 @@ function checkButtons(length)
 // Grab next 6 contacts to display - NEED TEST
 function searchNext()
 {
-	let length = (searchList.length-searchIndex > 6) ? 6 : searchList.length;
-	for (let i = searchIndex; i < length; i++)
+	let length = (searchList.length-searchIndex > 6) ? 6 : (searchList.length-searchIndex) ;
+	for (let i = 1; i <= length; i++)
 	{
-		document.getElementById("found" + (i+1)).innerHTML = jsonObject.results[i];
+		document.getElementById("found" + i).innerHTML = searchList[searchIndex];
 		searchIndex++;
 	}
 	checkButtons(length);
 
-	if (index >= jsonObject.results.length - 6)
+	if (searchIndex >= searchList.length - 6)
+	{
 		document.getElementById("next").disabled = true;
+		document.getElementById("prev").disabled = false;
+	}
 	else
 		document.getElementById("next").disabled = false;
+	searchIndex--;
 }
 
+<<<<<<< Updated upstream:js/dataFunctions.js
 // Grab last 6 contacts to display - NEED TEST
+=======
+// Grab last 6 contacts to display - NOT SHOWING
+>>>>>>> Stashed changes:lampapi/js/dataFunctions.js
 function searchPrev()
 {
-	for (let i = searchIndex; i >= 0; i--)
+	for (let i = 6; i >= 1; i--)
 	{
-		document.getElementById("found" + (i+1)).innerHTML = jsonObject.results[i];
+		document.getElementById("found" + i).innerHTML = searchList[searchIndex];
 		searchIndex--;
 	}
 	checkButtons(length);
 
-	if (index <= 6)
+	if (searchIndex <= 6)
+	{
+		document.getElementById("next").disabled = false;
 		document.getElementById("prev").disabled = true;
+	}
 	else
 		document.getElementById("prev").disabled = false;
 }
