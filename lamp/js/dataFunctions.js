@@ -1,4 +1,4 @@
-const urlBase = 'http://thebenbowles.com/cop4331/lampapi/';
+const urlBase = 'http://thebenbowles.com/cop4331/lamp/';
 const extension = 'php';
 
 var userId = 0;
@@ -20,7 +20,7 @@ function register()
 	// Put login into database
 	document.getElementById("registerResult").innerHTML = "";
 
-	let tmp = {firstname:firstName,lastname:lastName,Login:username,Password:password};
+	let tmp = {firstname:firstName,lastname:lastName,login:username,password:password};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/Register.' + extension;
