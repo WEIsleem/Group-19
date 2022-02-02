@@ -90,7 +90,6 @@ input {
 .found-box {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 	/*border: 3px dashed purple;*/
 }
 

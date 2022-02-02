@@ -4,8 +4,14 @@ const extension = 'php';
 var userId = 0;
 var firstName = "";
 var lastName = "";
+
 var searchList = "";
 var searchIndex = 0;
+
+var updateId = "";
+var updateFirst = "";
+var updateLast = "";
+
 var deleteId = "";
 console.log("hi");
 
@@ -105,7 +111,7 @@ function saveCookie()
 	let minutes = 20;
 	let date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));
-	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId;
 }
 
 // Reads the logged in user - works
@@ -206,7 +212,7 @@ function create()
 	}
 }
 
-// Search for existing objects - THROWS BACK NAME COLUMN NOT FIRST + LAST NAMES
+// Search for existing objects - works
 function search()
 {
 	// Search by first name
@@ -242,7 +248,11 @@ function search()
 
 				for( let i = 0; i < length; i++ )
 				{
-					document.getElementById("found" + (i+1)).innerHTML = jsonObject.results[i];
+					let infoList = jsonObject.results[i].split(" ");
+					document.getElementById("found" + (i+1)).innerHTML =
+						infoList[0] + " " + infoList[1] + "<br>" +
+						infoList[2] + "<br>" +
+						infoList[3];
 					searchIndex++;
 				}
 
@@ -267,55 +277,93 @@ function search()
 	}
 }
 
-function update()
+// Hides unnecessary contact boxes - works
+function checkButtons(length)
 {
-	// ADD UPDATE
-	let updateEmail = document.getElementById("updateEmailText").value;
-	let updatePhone = document.getElementById("updatePhoneText").value;
-	document.getElementById("updateResult").innerHTML = "";
-
-	// Check valid email and phone
-	if (newEmail.match(/\S+@\S+\.\S+/) == null)
+	for (let i = 1; i <= 6; i++)
 	{
-		document.getElementById("createResult").innerHTML = "Invalid email";
-		return;
-	}
-	if (newPhone.match(/^\d+$/) == null)
-	{
-		document.getElementById("createResult").innerHTML = "Invalid phone number";
-		return;
-	}
-
-	let tmp = {userId:userId,firstName:newFirst,lastName:newLast,email:newEmail,phone:newPhone};
-	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/AddContact.' + extension;
-
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function()
+		if (i <= length)
 		{
-			if (this.readyState == 4 && this.status == 200)
-			{
-				document.getElementById("createResult").innerHTML = "Contact added successfully";
-
-				document.getElementById("createFirstText").value = "";
-				document.getElementById("createLastText").value = "";
-				document.getElementById("createEmailText").value = "";
-				document.getElementById("createPhoneText").value = "";
-			}
-		};
-		xhr.send(jsonPayload);
+			//console.log("See box" + i);
+			document.getElementById("box" + i).style.display = "flex";
+		}
+		else
+		{
+			document.getElementById("box" + i).style.display = "none";
+		}
 	}
-	catch(err)
+	//console.log("BUTTON CHECK COMPLETE")
+}
+
+// Grab next 6 contacts to display - works
+function searchNext()
+{
+	console.log("NEXT");
+	// If in on previous #, go forward to next column
+	if (searchIndex % 2 != 0)
+	searchIndex += 7;
+
+	let length = (searchList.length-searchIndex > 6) ? 6 : (searchList.length-searchIndex);
+	//console.log("Length: " + length);
+	//console.log("Start at " + searchIndex);
+	for (let i = 1; i <= length; i++)
 	{
-		document.getElementById("createResult").innerHTML = err.message;
+		let infoList = searchList[searchIndex].split(" ");
+		document.getElementById("found" + i).innerHTML =
+			infoList[0] + " " + infoList[1] + "<br>" +
+			infoList[2] + "<br>" +
+			infoList[3];
+		searchIndex++;
 	}
+	checkButtons(length);
+	//console.log("Stopped at " + searchIndex);
 
-	console.log("CONTACT UPDATED");
+	if (searchIndex >= searchList.length)	// At end
+	{
+		document.getElementById("next").disabled = true;
+		document.getElementById("prev").disabled = false;
+		searchIndex -= searchIndex % 6;
+		searchIndex--;
+	}
+	else 	// At middle
+	{
+		document.getElementById("next").disabled = false;
+		document.getElementById("prev").disabled = false;
+	}
+}
+
+// Grab last 6 contacts to display - works
+function searchPrev()
+{
+	console.log("PREVIOUS");
+	// If on next #, go back to last column
+	if (searchIndex % 2 == 0)
+	searchIndex -= 7;
+
+	//console.log("Start at " + searchIndex);
+	for (let i = 6; i >= 1; i--)
+	{
+		let infoList = searchList[searchIndex].split(" ");
+		document.getElementById("found" + i).innerHTML =
+			infoList[0] + " " + infoList[1] + "<br>" +
+			infoList[2] + "<br>" +
+			infoList[3];
+		searchIndex--;
+	}
+	checkButtons(6);
+	//console.log("Stopped at " + searchIndex);
+
+	if (searchIndex <= 0)	// At beginning
+	{
+		document.getElementById("next").disabled = false;
+		document.getElementById("prev").disabled = true;
+		searchIndex += 7;
+	}
+	else	// In middle
+	{
+		document.getElementById("next").disabled = false;
+		document.getElementById("prev").disabled = false;
+	}
 }
 
 // Show delete popup - works
@@ -331,70 +379,125 @@ function popupVisible(contact)
 	}
 }
 
-// NEEDS DELETE CONNECTION TO API - hiding works
+// Deletes an existing contact - DOESNT REMOVE FROM DATABASE
 function deleteContact()
 {
-	// ADD DELETE
-	document.getElementById(deleteId).style.display = "none";
-	document.getElementById("deletePopup").style.display = "none";
-	console.log(deleteId + " DELETED");
+	let deleteValue = deleteId.substr(3, 1);
+	let deleteData = document.getElementById("found" + deleteValue).innerHTML;
+	let nameArray = deleteData.split(" ", 2);
+	console.log("TESTING: " + nameArray);
 
-}
+	let delFirst = nameArray[0];
+	let delLast = nameArray[1];
+	console.log("DELETING " + nameArray[0] + " " + nameArray[1]);
 
-// Hides unnecessary contact boxes - works
-function checkButtons(length)
-{
-	for (let i = 1; i <= 6; i++)
+	let tmp = {userId:userId,firstName:delFirst,lastName:delLast};
+	let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/RemoveContact.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
 	{
-		if (i <= length)
+		xhr.onreadystatechange = function()
 		{
-			console.log("See box" + i);
-			document.getElementById("box" + i).style.display = "flex";
-		}
-		else
+			if (this.readyState == 4 && this.status == 200)
+			{
+				document.getElementById("searchResult").innerHTML = "Contact deleted successfully";
+				document.getElementById(deleteId).style.display = "none";
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("searchResult").innerHTML = err.message;
+	}
+}
+
+
+
+// -----Update.html-----
+function updatingCookie()
+{
+	let first = localStorage['updateFirst'] || "";
+	let last = localStorage['updateLast'] || "";
+	document.getElementById("updating").innerHTML = "Updating Info for " + first + " " + last;
+
+	document.getElementById("updateEmailText").value = "";
+	document.getElementById("updatePhoneText").value = "";
+}
+
+// Grab the name to update and redirect to update.html - works
+function toUpdate(contact)
+{
+	updateId = contact.parentNode.parentNode.id;
+	console.log("Update " + updateId);
+	let updateValue = updateId.substr(3, 1);
+	let updateData = document.getElementById("found" + updateValue).innerHTML;
+	var nameArray = updateData.split(" ", 2);
+
+	localStorage['updateFirst'] = nameArray[0];
+	localStorage['updateLast'] = nameArray[1];
+
+	window.location.href = "update.html";
+}
+
+// Update an existing contact - NOT UPDATING SERVER SIDE
+function update()
+{
+	let updateFirst = "Test";
+	let updateLast = "Test";
+	let updateEmail = document.getElementById("updateEmailText").value;
+	let updatePhone = document.getElementById("updatePhoneText").value;
+	document.getElementById("updateResult").innerHTML = "";
+
+	console.log(updateEmail + " " + updatePhone);
+
+	// Check valid email and phone
+	if (updateEmail.match(/\S+@\S+\.\S+/) == null)
+	{
+		document.getElementById("updateResult").innerHTML = "Invalid email";
+		return;
+	}
+	if (updatePhone.match(/^\d+$/) == null)
+	{
+		document.getElementById("updateResult").innerHTML = "Invalid phone number";
+		return;
+	}
+
+	let contactID = 168;
+
+	let tmp = {ID:contactID,firstName:updateFirst,lastName:updateLast,Phone:updatePhone,Email:updateEmail};
+	let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/EditContact.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function()
 		{
-			document.getElementById("box" + i).style.display = "none";
-		}
-	}
-	console.log("BUTTON CHECK COMPLETE")
-}
+			if (this.readyState == 4 && this.status == 200)
+			{
+				document.getElementById("updateResult").innerHTML = "Contact updated successfully";
 
-// Grab next 6 contacts to display - works
-function searchNext()
-{
-	let length = (searchList.length-searchIndex > 6) ? 6 : (searchList.length-searchIndex) ;
-	for (let i = 1; i <= length; i++)
-	{
-		document.getElementById("found" + i).innerHTML = searchList[searchIndex];
-		searchIndex++;
-	}
-	checkButtons(length);
+				document.getElementById("updateEmailText").value = "";
+				document.getElementById("updatePhoneText").value = "";
 
-	if (searchIndex >= searchList.length - 6)
-	{
-		document.getElementById("next").disabled = true;
-		document.getElementById("prev").disabled = false;
+				//setTimeout(window.location.href = "menu.html", 2000);
+			}
+		};
+		xhr.send(jsonPayload);
 	}
-	else
-		document.getElementById("next").disabled = false;
-	searchIndex--;
-}
+	catch(err)
+	{
+		document.getElementById("updateResult").innerHTML = err.message;
+	}
 
-// Grab last 6 contacts to display - NOT SHOWING
-function searchPrev()
-{
-	for (let i = 6; i >= 1; i--)
-	{
-		document.getElementById("found" + i).innerHTML = searchList[searchIndex];
-		searchIndex--;
-	}
-	checkButtons(length);
-
-	if (searchIndex <= 6)
-	{
-		document.getElementById("next").disabled = false;
-		document.getElementById("prev").disabled = true;
-	}
-	else
-		document.getElementById("prev").disabled = false;
+	console.log("CONTACT UPDATED");
 }
