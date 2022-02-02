@@ -2,6 +2,7 @@
 
 	$inData = getRequestInfo();
    	$contactId = $inData["ID"];
+	echo("ID = " . $contactId);
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -15,6 +16,7 @@
 		$stmt->execute();
 
 		$result = $stmt->get_result();
+		
 		
         	// delete from database
 		if ($row = $result->fetch_assoc())
