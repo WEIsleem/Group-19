@@ -11,6 +11,7 @@
 		document.addEventListener('DOMContentLoaded', function()
 		{
 			readCookie();
+			updatingCookie();
 		}, false);
 	</script>
 </head>
@@ -27,9 +28,7 @@
 
 			<!-- Update -->
 			<div class="selected-box">
-				<span id="selected" class="text">Update a Contact</span>
-				<input type="text" id="updateFirstText" class="text" placeholder="First Name">
-				<input type="text" id="updateLastText" class="text" placeholder="Last Name">
+				<span id="updating" class="text"></span>
 				<input type="text" id="updateEmailText" class="text" placeholder="Email (Ex: email@email.com)">
 				<input type="text" id="updatePhoneText" class="text" placeholder="Phone (Ex: 0001112222)">
 				<div class="update-buttons">
