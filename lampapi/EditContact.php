@@ -2,11 +2,12 @@
 
 	$inData = getRequestInfo();
 	
+	$contactId = $inData["ID"];
 	$firstName = $inData["firstName"];
 	$lastName = $inData["lastName"];
 	$phone = $inData["Phone"];
 	$email = $inData["Email"];
-	$userId = $inData["userId"];
+	#$userId = $inData["userId"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -16,7 +17,7 @@
 	else
 	{
 
-		$stmt = $conn->prepare("SELECT userId, firstName, lastName FROM Contacts WHERE (userId='$userId' AND firstName = '$firstName' AND lastName = '$lastName')");
+		$stmt = $conn->prepare("SELECT ID FROM Contacts WHERE ID = '$contactId'");
 		$stmt->execute();
 
 		$result = $stmt->get_result();
@@ -24,7 +25,7 @@
         	// delete from database
 		if ($row = $result->fetch_assoc())
 		{
-			$conn->query("UPDATE Contacts SET Email = '$email', Phone = '$phone' WHERE (userId = '$userId' AND firstName = '$firstName' AND lastName = '$lastName')");
+			$conn->query("UPDATE Contacts SET Email = '$email', Phone = '$phone', firstName = '$firstName', lastName = '$lastName' WHERE ID = '$contactId'");
 		}
         else 
         {
