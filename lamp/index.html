@@ -9,29 +9,52 @@
 
 <body>
 	<!-- Page -->
-	<section class="page-container">
+	<section role="main" class="page-container text">
 		<h1>COP4331 Group 19's Small Project</h1>
-
-		<!-- Register -->
 		<div class="login-box">
-			<span class="head-text">Register</span>
-			<input type="text" id="newFirstName" class="text" placeholder="First Name">
-			<input type="text" id="newLastName" class="text" placeholder="Last Name">
-			<input type="text" id="newUsername" class="text" placeholder="Username">
-			<input type="text" id="newPassword" class="text" placeholder="Password">
-			<button type="button" class="text buttons" onclick="register();">Register</button>
-			<span id="registerResult"></span>
-		</div>
+			<span style="height:10px"></span>
 
-		<span style="height:10px"></span>
+			<!-- Register -->
+			<div class="color-box">
+				<span class="head-text">Register</span>
+				<div class="input-box">
+					<label for="newFirstName">First Name:</label>
+					<input type="text" id="newFirstName" class="text" placeholder="John">
+					<span></span>
 
-		<!-- Login -->
-		<div class="login-box">
-			<span class="head-text">Log In</span>
-			<input type="text" id="username" class="text" placeholder="Username">
-			<input type="text" id="password" class="text" placeholder="Password">
-			<button type="button" class="text buttons" onclick="login();">Log In</button>
-			<span id="loginResult"></span>
+					<label for="newLastName">Last Name:</label>
+					<input type="text" id="newLastName" class="text" placeholder="Smith">
+					<span></span>
+
+					<label for="newUsername">Username:</label>
+					<input type="text" id="newUsername" class="text" placeholder="johnsmith">
+					<span></span>
+
+					<label for="newPassword">Password:</label>
+					<input type="password" id="newPassword" class="text" placeholder="password123">
+					<span></span>
+				</div>
+				<button type="button" class="text buttons" onclick="register();">Register</button>
+				<span id="registerResult" class="message-text"></span>
+			</div>
+
+			<!-- Login -->
+			<div class="color-box">
+				<span class="head-text">Log In</span>
+				<div class="input-box">
+					<label for="username">Username:</label>
+					<input type="text" id="username" class="text" placeholder="johnsmith">
+					<span></span>
+
+					<label for="password">Password:</label>
+					<input type="password" id="password" class="text" placeholder="password123">
+					<span></span>
+				</div>
+				<button type="button" class="text buttons" onclick="login();">Log In</button>
+				<span id="loginResult" class="message-text"></span>
+			</div>
+
+			<span style="height:10px"></span>
 		</div>
 	</section>
 </body>

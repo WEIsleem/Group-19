@@ -10,13 +10,13 @@ $lastName = $inData["lastname"];
 $login = $inData["login"];
 $password = $inData["password"];
 
-$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
+$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 if( $conn->connect_error )
 {
     returnWithError( $conn->connect_error );
 }
 else
-{   
+{
     $stmt = $conn->prepare("INSERT INTO Users (firstName,lastName,login,password) VALUES(?,?,?,?)");
     $stmt->bind_param("ssss", $firstName, $lastName, $login, $password);
     $stmt->execute();

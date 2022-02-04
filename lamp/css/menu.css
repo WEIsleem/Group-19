@@ -7,17 +7,23 @@ html {
 	height: 100%;
 }
 input {
-	width: 60%;
 	text-align: center;
 }
 
-/* Phone Scaling */
+@media screen and (max-device-width: 480px) {
+	.input-box {
+		display: flex !important;
+		flex-flow: column wrap;
+		align-items: center;
+	}
+}
+
 @media only screen and (max-width: 700px){
 	h1 {
 		font-size: 20px;
 	}
 	input {
-		width: 80% !important;
+		width: 100% !important;
 	}
 
 	.page-container {
@@ -34,6 +40,10 @@ input {
 	}
 	.found-box {
 		flex-direction: column;
+	}
+	.input-box {
+		grid-template-columns: 110px 1fr 0px !important;
+		width: 90% !important;
 	}
 
 	.search-buttons {
@@ -79,17 +89,25 @@ input {
 	border: 3px solid #4f4f4f;
 	/*border: 3px dashed blue;*/
 }
+.input-box {
+	display: grid;
+	grid-template-columns: 110px 1fr 110px;
+	gap: 10px;
+	width: 80%;
+	/*border: 3px dashed purple;*/
+}
 .searched-box {
 	display: grid;
 	grid-template-rows: repeat(6, 1fr);
 	width: 90%;
-	height: 500px;
-	align-items: center;
+	height: 530px;
 	/*border: 3px dashed red;*/
 }
 .found-box {
 	display: flex;
 	justify-content: space-between;
+	padding: 8px 0px;
+	border-bottom: 1px solid #4f4f4f;
 	/*border: 3px dashed purple;*/
 }
 
@@ -97,6 +115,7 @@ input {
 .search-buttons {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	/*border: 3px dashed green;*/
 }
 .menu-buttons {
@@ -113,20 +132,9 @@ input {
 	font-family: 'Trebuchet MS';
 	font-size: 20px;
 }
-#createResult {
+.message-text {
 	font-family: 'Trebuchet MS';
 	color: #de0f00;
-}
-#searchResult {
-	font-family: 'Trebuchet MS';
-	color: #de0f00;
-}
-#updateResult {
-	font-family: 'Trebuchet MS';
-	color: #de0f00;
-}
-#timeout {
-	font-family: 'Trebuchet MS';
-	color: #de0f00;
-	font-size: 20px;
+	-webkit-text-stroke-width: 0.5px;
+	-webkit-text-stroke-color: black;
 }

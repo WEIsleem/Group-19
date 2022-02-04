@@ -19,23 +19,35 @@
 
 <body>
 	<!-- Page -->
-	<section class="page-container">
+	<section role="main" class="page-container text">
 		<h1>COP4331 Group 19's Small Project</h1>
 		<div class="color-box">
 			<!-- Name/Logout -->
 			<span id="headText" class="head-text"></span>
 			<button class="text" onclick="logout();">Log Out</button>
-			<span id="timeout"></span>
 
 			<!-- Create -->
 			<div class="selected-box">
-				<span id="selected" class="text">Add a Contact</span>
-				<input type="text" id="createFirstText" class="text" placeholder="First Name">
-				<input type="text" id="createLastText" class="text" placeholder="Last Name">
-				<input type="text" id="createEmailText" class="text" placeholder="Email (Ex: email@email.com)">
-				<input type="text" id="createPhoneText" class="text" placeholder="Phone (Ex: 0001112222)">
+				<span id="selected">Add a Contact</span>
+				<div class="input-box">
+					<label for="createFirstText">First Name:</label>
+					<input type="text" id="createFirstText" class="text" placeholder="John">
+					<span></span>
+
+					<label for="createLastText">Last Name:</label>
+					<input type="text" id="createLastText" class="text" placeholder="Smith">
+					<span></span>
+
+					<label for="createEmailText">Email:</label>
+					<input type="text" id="createEmailText" class="text" placeholder="email@email.com">
+					<span></span>
+
+					<label for="createPhoneText">Phone:</label>
+					<input type="text" id="createPhoneText" class="text" placeholder="0001112222">
+					<span></span>
+				</div>
 				<button class="text menu-buttons" onclick="create();">Create</button>
-				<span id="createResult"></span>
+				<span id="createResult" class="message-text"></span>
 			</div>
 
 
@@ -43,9 +55,12 @@
 			<div class="selected-box">
 				<span style="height: 0.5px"></span>
 				<span id="selected" class="text">Search for a Contact</span>
-				<input type="text" id="searchFirstText" class="text" placeholder="First Name">
+				<div class="input-box">
+					<label for="searchFirstText">First Name:</label>
+					<input type="text" id="searchFirstText" class="text" placeholder="John">
+				</div>
 				<button class="text menu-buttons" onclick="search();">Search</button>
-				<span id="searchResult"></span>
+				<span id="searchResult" class="message-text"></span>
 
 				<!-- Found contacts -->
 				<div class="searched-box">
@@ -103,6 +118,7 @@
 						<button id="next" class="text" disabled onclick="searchNext();">></button>
 					</div>
 				</div>
+				<span style="height: 10px"></span>
 			</div>
 			<span style="height: 10px"></span>
 		</div>

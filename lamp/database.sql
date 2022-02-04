@@ -31,7 +31,7 @@ CREATE TABLE `Contacts` (
   `UserID` int NOT NULL DEFAULT '0',
   `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `Contacts` (
 
 LOCK TABLES `Contacts` WRITE;
 /*!40000 ALTER TABLE `Contacts` DISABLE KEYS */;
-INSERT INTO `Contacts` VALUES (129,'Karina','N',NULL,NULL,1,'2022-01-23 03:19:37'),(130,'Karina','N',NULL,NULL,1,'2022-01-23 03:19:39'),(131,'Karina','N',NULL,NULL,1,'2022-01-23 03:46:01'),(132,'Karina','N',NULL,NULL,1,'2022-01-23 04:08:09'),(133,'Karina','N',NULL,NULL,1,'2022-01-23 04:08:10'),(134,'Karina','N',NULL,NULL,1,'2022-01-23 04:12:32'),(135,'Karina','N',NULL,NULL,1,'2022-01-23 04:12:33'),(136,'Karina','N',NULL,NULL,1,'2022-01-23 04:12:34'),(137,'Karina','N',NULL,NULL,1,'2022-01-23 04:36:34'),(138,'Karina','N',NULL,NULL,1,'2022-01-23 04:36:35'),(139,'Karina','N',NULL,NULL,1,'2022-01-23 04:36:35'),(140,'Karina','N',NULL,NULL,1,'2022-01-23 18:58:01'),(141,'bob','ross','ereadsfad@fau.edu','4434243',1,'2022-01-23 19:23:18'),(142,'karina','n',NULL,NULL,1,'2022-01-23 19:43:57'),(143,'Karina','n','ereadsfad@fau.edu','4434243',20,'2022-01-29 02:51:24'),(144,'Karina','n','ereadsfad@fau.edu','4434243',20,'2022-01-29 02:52:15'),(145,'Karina','n','ereadsfad@fau.edu','4434243',20,'2022-01-29 02:54:52'),(154,'Karina','n','ereadsfad@fau.edu','4434243',20,'2022-01-30 22:33:13'),(155,'Hannibal','Barca','Hannibal@Cannae.Ca','2092162912',1,'2022-01-31 00:03:54');
+INSERT INTO `Contacts` VALUES (141,'bob','ross','ereadsfad@fau.edu','4434243',1,'2022-01-23 19:23:18'),(155,'Hannibal','Barca','Hannibal@Cannae.Ca','2092162912',1,'2022-01-31 00:03:54'),(156,'Test','1',NULL,NULL,38,'2022-01-31 18:19:24'),(157,'Hans','Solo','Hanshotfirst@corellia.co','2187',47,'2022-01-31 18:29:37'),(158,'Test','1','testing@update.com','9999999999',42,'2022-01-31 18:36:07'),(159,'Scipio','Africanus',NULL,NULL,47,'2022-01-31 18:45:11'),(160,'Scipio2','Africanus',NULL,NULL,47,'2022-01-31 18:46:36'),(161,'Pliny','The Elder','test@email.com','1234',47,'2022-01-31 18:48:24'),(162,'s','s',NULL,NULL,47,'2022-01-31 18:49:49'),(163,'test','testlast',NULL,NULL,1,'2022-01-31 18:52:26'),(164,'test','testlast','temp@gmail.com','5555555555',1,'2022-01-31 18:52:50'),(165,'Jeffrey','Bezos',NULL,NULL,47,'2022-01-31 18:53:11'),(166,'Test1','Test1',NULL,NULL,47,'2022-01-31 18:54:17'),(167,'testagain','testlast','temp@gmail.com','5555555555',1,'2022-01-31 18:55:09'),(168,'Test','Test','email@email.com','555555555555',42,'2022-01-31 18:56:43'),(169,'TestWeb','TestWeb',NULL,NULL,47,'2022-01-31 18:58:36'),(170,'testagain','testlast','temp@gmail.com','5555555555',1,'2022-01-31 19:00:06'),(171,'1','1',NULL,NULL,47,'2022-01-31 19:00:25'),(172,'testagain','testlast','temp@gmail.com','5555555555',1,'2022-01-31 19:02:40'),(174,'Ben','B',NULL,NULL,47,'2022-01-31 19:08:03'),(176,'First','Last','email@email.me','9',47,'2022-01-31 19:19:58'),(177,'Cato','The Elder','carthagodelenda@rome.com','200',47,'2022-01-31 19:22:55'),(178,'testy','boi','boi@boi.io','666666666',42,'2022-01-31 19:25:08'),(179,'Julius','Caesar','ereadsfad@fau.edu','4434243',47,'2022-01-31 19:25:21'),(183,'test12','test12',NULL,NULL,53,'2022-02-02 17:39:57'),(185,'Arsen','Aldea','realemail@email.gov','5613608035',42,'2022-02-03 21:14:47');
 /*!40000 ALTER TABLE `Contacts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `Users` (
   `Login` varchar(50) NOT NULL DEFAULT '',
   `Password` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (38,'2022-01-30 23:03:22','2022-01-30 23:03:22','Tom','Williamson','testperson','testPassword'),(39,'2022-01-31 00:29:16','2022-01-31 00:29:16','ryan','enriquez','test2','testPassword');
+INSERT INTO `Users` VALUES (38,'2022-01-30 23:03:22','2022-01-30 23:03:22','Tom','Williamson','testperson','testPassword'),(39,'2022-01-31 00:29:16','2022-01-31 00:29:16','ryan','enriquez','test2','testPassword'),(42,'2022-01-31 18:10:52','2022-01-31 18:10:52','Gaby','Test','gabytest','gabytest'),(46,'2022-01-31 18:26:22','2022-01-31 18:26:22','hannibal','barca','carthage','carthage'),(47,'2022-01-31 18:27:24','2022-01-31 18:27:24','Jeff','Jeff','Jeff','Jeff'),(50,'2022-01-31 20:42:11','2022-01-31 20:42:11','Lab','Checkin','labUser','labPassword'),(51,'2022-02-01 22:27:00','2022-02-01 22:27:00','a','a','a','a'),(53,'2022-02-02 17:39:22','2022-02-02 17:39:22','test12','test12','test12','test12'),(56,'2022-02-02 19:54:56','2022-02-02 19:54:56','hmmm','eeeeeeee','testingregister','registerpass');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -82,4 +82,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-31  0:40:26
+-- Dump completed on 2022-02-04 17:18:13

@@ -7,17 +7,20 @@ html {
 	height: 100%;
 }
 input {
-	width: 60%;
 	text-align: center;
 }
 
-/* Phone Scaling */
+@media screen and (max-device-width: 480px) {
+	.input-box {
+		display: flex !important;
+		flex-flow: column wrap;
+		align-items: center;
+	}
+}
+
 @media only screen and (max-width: 700px){
 	h1 {
 		font-size: 20px;
-	}
-	input {
-		width: 80% !important;
 	}
 
 	.page-container {
@@ -31,6 +34,10 @@ input {
 	}
 	.searched-box {
 		height: 700px !important;
+	}
+	.input-box {
+		grid-template-columns: 110px 1fr 0px !important;
+		width: 90% !important;
 	}
 
 	.head-text {
@@ -71,6 +78,13 @@ input {
 	border: 3px solid #4f4f4f;
 	/*border: 3px dashed blue;*/
 }
+.input-box {
+	display: grid;
+	grid-template-columns: 110px 1fr 110px;
+	gap: 10px;
+	width: 80%;
+	border: 3px dashed purple;*/
+}
 
 /* Button display */
 .update-buttons {
@@ -93,12 +107,7 @@ input {
 	font-family: 'Trebuchet MS';
 	font-size: 20px;
 }
-#updateResult {
+.message-text {
 	font-family: 'Trebuchet MS';
 	color: #de0f00;
-}
-#timeout {
-	font-family: 'Trebuchet MS';
-	color: #de0f00;
-	font-size: 20px;
 }

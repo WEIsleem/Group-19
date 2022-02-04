@@ -7,6 +7,7 @@ var lastName = "";
 
 var searchList = "";
 var searchIndex = 0;
+var indexList = [0,1,2,3,4,5];
 
 var updateId = "";
 var updateFirst = "";
@@ -26,7 +27,7 @@ function register()
 	// Put login into database
 	document.getElementById("registerResult").innerHTML = "";
 
-	let tmp = {firstname:firstName,lastname:lastName,login:username,password:password};
+	let tmp = {firstName:firstName,lastName:lastName,login:username,password:password};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/Register.' + extension;
@@ -41,13 +42,6 @@ function register()
 			if (this.readyState == 4 && this.status == 200)
 			{
 				document.getElementById("registerResult").innerHTML = "User created successfully";
-
-				let jsonObject = JSON.parse( xhr.responseText );
-				userId = jsonObject.id;
-
-				saveCookie();
-
-				window.location.href = "menu.html";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -56,6 +50,28 @@ function register()
 	{
 		document.getElementById("registerResult").innerHTML = err.message;
 	}
+
+	tmp = {login:username,password:password};
+	jsonPayload = JSON.stringify( tmp );
+
+	url = urlBase + '/Login.' + extension;
+
+	xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	xhr.onreadystatechange = function()
+	{
+		if (this.readyState == 4 && this.status == 200)
+		{
+			let jsonObject = JSON.parse( xhr.responseText );
+			userId = jsonObject.id;
+
+			saveCookie();
+
+			window.location.href = "menu.html";
+		}
+	};
+	xhr.send(jsonPayload);
 }
 
 // Login a user - works
@@ -249,6 +265,7 @@ function search()
 				for( let i = 0; i < length; i++ )
 				{
 					let infoList = jsonObject.results[i].split(" ");
+
 					document.getElementById("found" + (i+1)).innerHTML =
 						infoList[0] + " " + infoList[1] + "<br>" +
 						infoList[2] + "<br>" +
@@ -308,6 +325,7 @@ function searchNext()
 	//console.log("Start at " + searchIndex);
 	for (let i = 1; i <= length; i++)
 	{
+		indexList[i-1] = searchIndex;
 		let infoList = searchList[searchIndex].split(" ");
 		document.getElementById("found" + i).innerHTML =
 			infoList[0] + " " + infoList[1] + "<br>" +
@@ -343,6 +361,7 @@ function searchPrev()
 	//console.log("Start at " + searchIndex);
 	for (let i = 6; i >= 1; i--)
 	{
+		indexList[i-1] = searchIndex;
 		let infoList = searchList[searchIndex].split(" ");
 		document.getElementById("found" + i).innerHTML =
 			infoList[0] + " " + infoList[1] + "<br>" +
@@ -383,15 +402,10 @@ function popupVisible(contact)
 function deleteContact()
 {
 	let deleteValue = deleteId.substr(3, 1);
-	let deleteData = document.getElementById("found" + deleteValue).innerHTML;
-	let nameArray = deleteData.split(" ", 2);
-	console.log("TESTING: " + nameArray);
+	let deleteData = searchList[indexList[deleteValue-1]];
+	let id = deleteData.substring(deleteData.length - 4);
 
-	let delFirst = nameArray[0];
-	let delLast = nameArray[1];
-	console.log("DELETING " + nameArray[0] + " " + nameArray[1]);
-
-	let tmp = {userId:userId,firstName:delFirst,lastName:delLast};
+	let tmp = {ID:id};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/RemoveContact.' + extension;
@@ -422,12 +436,10 @@ function deleteContact()
 // -----Update.html-----
 function updatingCookie()
 {
-	let first = localStorage['updateFirst'] || "";
-	let last = localStorage['updateLast'] || "";
-	document.getElementById("updating").innerHTML = "Updating Info for " + first + " " + last;
-
-	document.getElementById("updateEmailText").value = "";
-	document.getElementById("updatePhoneText").value = "";
+	document.getElementById("updateFirstText").value = localStorage['firstName'] || "";
+	document.getElementById("updateLastText").value = localStorage['lastName'] || "";
+	document.getElementById("updateEmailText").value = localStorage['email'] || "";
+	document.getElementById("updatePhoneText").value = localStorage['phone'] || "";
 }
 
 // Grab the name to update and redirect to update.html - works
@@ -436,11 +448,19 @@ function toUpdate(contact)
 	updateId = contact.parentNode.parentNode.id;
 	console.log("Update " + updateId);
 	let updateValue = updateId.substr(3, 1);
-	let updateData = document.getElementById("found" + updateValue).innerHTML;
-	var nameArray = updateData.split(" ", 2);
+	let updateData = searchList[indexList[updateValue-1]];
 
-	localStorage['updateFirst'] = nameArray[0];
-	localStorage['updateLast'] = nameArray[1];
+	let id = updateData.substring(updateData.length - 4);
+	localStorage['contactID'] = id.trim();
+
+	let infoList = updateData.split(" ", 4);
+	localStorage['firstName'] = infoList[0];
+	localStorage['lastName'] = infoList[1];
+	localStorage['email'] = infoList[2];
+	localStorage['phone'] = infoList[3];
+
+	console.log("Info: " + infoList);
+	console.log("ID: " + id);
 
 	window.location.href = "update.html";
 }
@@ -448,13 +468,14 @@ function toUpdate(contact)
 // Update an existing contact - NOT UPDATING SERVER SIDE
 function update()
 {
-	let updateFirst = "Test";
-	let updateLast = "Test";
+	let updateFirst = document.getElementById("updateFirstText").value;
+	let updateLast = document.getElementById("updateLastText").value;
 	let updateEmail = document.getElementById("updateEmailText").value;
 	let updatePhone = document.getElementById("updatePhoneText").value;
+	let contactID = localStorage['contactID'] || -1;
 	document.getElementById("updateResult").innerHTML = "";
 
-	console.log(updateEmail + " " + updatePhone);
+	console.log(updateFirst + " " + updateLast + " " + updateEmail + " " + updatePhone);
 
 	// Check valid email and phone
 	if (updateEmail.match(/\S+@\S+\.\S+/) == null)
@@ -467,8 +488,6 @@ function update()
 		document.getElementById("updateResult").innerHTML = "Invalid phone number";
 		return;
 	}
-
-	let contactID = 168;
 
 	let tmp = {ID:contactID,firstName:updateFirst,lastName:updateLast,Phone:updatePhone,Email:updateEmail};
 	let jsonPayload = JSON.stringify( tmp );
@@ -489,7 +508,7 @@ function update()
 				document.getElementById("updateEmailText").value = "";
 				document.getElementById("updatePhoneText").value = "";
 
-				//setTimeout(window.location.href = "menu.html", 2000);
+				//setTimeout(window.location.href = "menu.html", 3000);
 			}
 		};
 		xhr.send(jsonPayload);
