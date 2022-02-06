@@ -232,7 +232,7 @@ function create()
 function search()
 {
 	// Search by first name
-	let srch = document.getElementById("searchFirstText").value;
+	let srch = document.getElementById("searchText").value;
 	document.getElementById("searchResult").innerHTML = "";
 
 	let tmp = {userId:userId,search:srch};
@@ -505,10 +505,14 @@ function update()
 			{
 				document.getElementById("updateResult").innerHTML = "Contact updated successfully";
 
+				document.getElementById("updateFirstText").value = "";
+				document.getElementById("updateLastText").value = "";
 				document.getElementById("updateEmailText").value = "";
 				document.getElementById("updatePhoneText").value = "";
 
-				//setTimeout(window.location.href = "menu.html", 3000);
+				setTimeout(function(){
+					window.location.href = "menu.html"
+				}, 2.0*1000);
 			}
 		};
 		xhr.send(jsonPayload);

@@ -2,7 +2,6 @@
 
 	$inData = getRequestInfo();
    	$contactId = $inData["ID"];
-	echo("ID = " . $contactId);
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 

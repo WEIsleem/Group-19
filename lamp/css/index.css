@@ -10,6 +10,7 @@ input {
 	text-align: center;
 }
 
+/* Scaling */
 @media screen and (max-device-width: 480px) {
 	.input-box {
 		display: flex !important;
@@ -55,8 +56,9 @@ input {
 	align-items: center;
 	gap: 10px;
 	width: 80%;
-	background-color: #c4c4c4;
-	border: 3px solid #4f4f4f;
+	background-color: #294f7e;
+	border: 5px solid #f2b035;
+	border-radius: 20px;
 	/*border: 3px dashed blue;*/
 }
 .login-box {
@@ -65,8 +67,9 @@ input {
 	align-items: center;
 	gap: 10px;
 	width: 80%;
-	background-color: #adadad;
-	border: 3px solid #4f4f4f;
+	background-color: #a8afb7;
+	border: 3px solid #f2b035;
+	border-radius: 20px;
 	border: /*3px dashed blue;*/
 }
 .input-box {
@@ -90,10 +93,9 @@ input {
 	font-family: 'Trebuchet MS';
 	font-size: 20px;
 }
-
 .message-text {
 	font-family: 'Trebuchet MS';
-	color: #de0f00;
-	-webkit-text-stroke-width: 0.5px;
+	color: #f2b035;
+	-webkit-text-stroke-width: 0.4px;
 	-webkit-text-stroke-color: black;
 }

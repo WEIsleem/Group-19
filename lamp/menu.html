@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
-	<title>19 Small Project</title>
+	<title>Contact Manager</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="js/dataFunctions.js"></script>
 	<link href="css/menu.css" rel="stylesheet">
+	<link href="font-awesome/css/fontawesome.min.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/b69506bf96.js" crossorigin="anonymous"></script>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+	<link rel="manifest" href="icons/site.webmanifest">
 
 	<script type="text/javascript">
 		document.addEventListener('DOMContentLoaded', function()
@@ -20,7 +27,7 @@
 <body>
 	<!-- Page -->
 	<section role="main" class="page-container text">
-		<h1>COP4331 Group 19's Small Project</h1>
+		<img src="icons/LogoBlack.png" alt="Knight's Contact Manager" height="100">
 		<div class="color-box">
 			<!-- Name/Logout -->
 			<span id="headText" class="head-text"></span>
@@ -56,8 +63,9 @@
 				<span style="height: 0.5px"></span>
 				<span id="selected" class="text">Search for a Contact</span>
 				<div class="input-box">
-					<label for="searchFirstText">First Name:</label>
-					<input type="text" id="searchFirstText" class="text" placeholder="John">
+					<label for="searchFirstText">First or Last Name:</label>
+					<input type="text" id="searchText" class="text" placeholder="John Smith">
+					<span></span>
 				</div>
 				<button class="text menu-buttons" onclick="search();">Search</button>
 				<span id="searchResult" class="message-text"></span>
@@ -67,48 +75,60 @@
 					<div id="box1" class="found-box" style="display:none">
 						<span id="found1" class="text"></span>
 						<div class="search-buttons">
-							<button class="text menu-buttons" onclick="toUpdate(this);">Update</button>
-							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+							<button class="text menu-buttons" onclick="toUpdate(this);">
+								<i class="fas fa-edit"></i>Update</button>
+							<button class="text menu-buttons" onclick="popupVisible(this);">
+								<i class="fas fa-trash-alt"></i> Delete</button>
 						</div>
 					</div>
 
 					<div id="box2" class="found-box" style="display:none">
 						<span id="found2" class="text"></span>
 						<div class="search-buttons">
-							<button class="text menu-buttons" onclick="toUpdate(this);">Update</button>
-							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+							<button class="text menu-buttons" onclick="toUpdate(this);">
+								<i class="fas fa-edit"></i>Update</button>
+							<button class="text menu-buttons" onclick="popupVisible(this);">
+								<i class="fas fa-trash-alt"></i> Delete</button>
 						</div>
 					</div>
 
 					<div id="box3" class="found-box" style="display:none">
 						<span id="found3" class="text"></span>
 						<div class="search-buttons">
-							<button class="text menu-buttons" onclick="toUpdate(this);">Update</button>
-							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+							<button class="text menu-buttons" onclick="toUpdate(this);">
+								<i class="fas fa-edit"></i>Update</button>
+							<button class="text menu-buttons" onclick="popupVisible(this);">
+								<i class="fas fa-trash-alt"></i> Delete</button>
 						</div>
 					</div>
 
 					<div id="box4" class="found-box" style="display:none">
 						<span id="found4" class="text"></span>
 						<div class="search-buttons">
-							<button class="text menu-buttons" onclick="toUpdate(this);">Update</button>
-							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+							<button class="text menu-buttons" onclick="toUpdate(this);">
+								<i class="fas fa-edit"></i>Update</button>
+							<button class="text menu-buttons" onclick="popupVisible(this);">
+								<i class="fas fa-trash-alt"></i> Delete</button>
 						</div>
 					</div>
 
 					<div id="box5" class="found-box" style="display:none">
 						<span id="found5" class="text"></span>
 						<div class="search-buttons">
-							<button class="text menu-buttons" onclick="toUpdate(this);">Update</button>
-							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+							<button class="text menu-buttons" onclick="toUpdate(this);">
+								<i class="fas fa-edit"></i>Update</button>
+							<button class="text menu-buttons" onclick="popupVisible(this);">
+								<i class="fas fa-trash-alt"></i> Delete</button>
 						</div>
 					</div>
 
 					<div id="box6" class="found-box" style="display:none">
 						<span id="found6" class="text"></span>
 						<div class="search-buttons">
-							<button class="text menu-buttons" onclick="toUpdate(this);">Update</button>
-							<button class="text menu-buttons" onclick="popupVisible(this);">Delete</button>
+							<button class="text menu-buttons" onclick="toUpdate(this);">
+								<i class="fas fa-edit"></i>Update</button>
+							<button class="text menu-buttons" onclick="popupVisible(this);">
+								<i class="fas fa-trash-alt"></i> Delete</button>
 						</div>
 					</div>
 
