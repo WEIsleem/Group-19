@@ -28,11 +28,11 @@
 		<div class="color-box">
 			<!-- Name/Logout -->
 			<span id="headText" class="head-text"></span>
-			<button class="text" onclick="logout();">Log Out</button>
+			<button class="text menu-buttons" onclick="logout();">Log Out</button>
 
 			<!-- Update -->
 			<div class="selected-box text">
-				<span id="updating" class="text">Updating Info</span>
+				<span id="updating" class="text">Updating Contact Info</span>
 				<div class="input-box">
 					<label for="updateFirstText">First Name:</label>
 					<input type="text" id="updateFirstText" class="text" placeholder="John">
@@ -51,9 +51,11 @@
 					<span></span>
 				</div>
 				<div class="update-buttons">
-					<button class="text menu-buttons" onclick="update();">Update</button>
+					<button class="text menu-buttons" onclick="update();">
+						<i class="fas fa-check"></i>Update</button>
 					<form action="menu.html">
-						<button type="submit" class="text menu-buttons">Cancel</button>
+						<button type="submit" class="text menu-buttons">
+							<i class="fas fa-times"></i>Cancel</button>
 					</form>
 				</div>
 				<span id="updateResult" class="message-text"></span>

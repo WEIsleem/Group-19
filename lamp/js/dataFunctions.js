@@ -24,15 +24,21 @@ function register()
 	lastName = document.getElementById("newLastName").value;
 	let username = document.getElementById("newUsername").value;
 	let password = document.getElementById("newPassword").value;
-	// Put login into database
 	document.getElementById("registerResult").innerHTML = "";
 
-	let tmp = {firstName:firstName,lastName:lastName,login:username,password:password};
-	let jsonPayload = JSON.stringify( tmp );
+	if (firstName == "" || lastName == "" || username == "" || password == "")
+	{
+		document.getElementById("registerResult").innerHTML = "Please fill in all fields";
+		return;
+	}
 
-	let url = urlBase + '/Register.' + extension;
+	// Create new user
+	tmp = {firstname:firstName,lastname:lastName,login:username,password:password};
+	jsonPayload = JSON.stringify( tmp );
 
-	let xhr = new XMLHttpRequest();
+	url = urlBase + '/Register.' + extension;
+
+	xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
@@ -41,6 +47,7 @@ function register()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
+				console.log(userId);
 				document.getElementById("registerResult").innerHTML = "User created successfully";
 			}
 		};
@@ -51,6 +58,9 @@ function register()
 		document.getElementById("registerResult").innerHTML = err.message;
 	}
 
+
+
+	// Login after user was created
 	tmp = {login:username,password:password};
 	jsonPayload = JSON.stringify( tmp );
 
@@ -160,7 +170,7 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("headText").innerHTML = "Logged in as " + firstName + " " + lastName;
+		document.getElementById("headText").innerHTML = "Welcome " + firstName + " " + lastName;
 	}
 }
 
@@ -232,6 +242,7 @@ function create()
 function search()
 {
 	// Search by first name
+	searchIndex = 0;
 	let srch = document.getElementById("searchText").value;
 	document.getElementById("searchResult").innerHTML = "";
 
@@ -318,7 +329,9 @@ function searchNext()
 	console.log("NEXT");
 	// If in on previous #, go forward to next column
 	if (searchIndex % 2 != 0)
-	searchIndex += 7;
+	{
+		searchIndex += 7;
+	}
 
 	let length = (searchList.length-searchIndex > 6) ? 6 : (searchList.length-searchIndex);
 	//console.log("Length: " + length);
@@ -356,7 +369,9 @@ function searchPrev()
 	console.log("PREVIOUS");
 	// If on next #, go back to last column
 	if (searchIndex % 2 == 0)
-	searchIndex -= 7;
+	{
+		searchIndex -= 7;
+	}
 
 	//console.log("Start at " + searchIndex);
 	for (let i = 6; i >= 1; i--)
@@ -398,7 +413,7 @@ function popupVisible(contact)
 	}
 }
 
-// Deletes an existing contact - DOESNT REMOVE FROM DATABASE
+// Deletes an existing contact - works
 function deleteContact()
 {
 	let deleteValue = deleteId.substr(3, 1);
@@ -465,7 +480,7 @@ function toUpdate(contact)
 	window.location.href = "update.html";
 }
 
-// Update an existing contact - NOT UPDATING SERVER SIDE
+// Update an existing contact - works
 function update()
 {
 	let updateFirst = document.getElementById("updateFirstText").value;
@@ -514,7 +529,7 @@ function update()
 					window.location.href = "menu.html"
 				}, 2.0*1000);
 			}
-		};
+		}
 		xhr.send(jsonPayload);
 	}
 	catch(err)
